@@ -1,0 +1,34 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar  class="ion-no-border" color="default" style="--border-width: 0; display: flex; justify-content: center; align-items: center; box-shadow: 0; border: none;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="" icon="chevron-back-outline" style="margin-left: 20px; color: rgba(0, 0, 0, 0.5);"></ion-back-button>
+    </ion-buttons>
+    <h1 style="margin-top: 12px; margin-left: 29%; flex: 1;">{{name}}</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content lines="none" *ngIf="(chats) as chat$">
+  <ion-item-group class="chats-group" *ngFor="let chat of chat$">
+    <app-chat-box [chat]="chat" [current_user_id]="currentUserId"></app-chat-box>
+  </ion-item-group>
+</ion-content>
+
+<ion-footer >
+  <ion-toolbar color="" style="--border-width: 0" class="footer-style"> 
+    <ion-textarea 
+      autoGrow 
+      rows="1" 
+      placeholder="Escreva aqui..." 
+      class="ion-text-start" 
+      [(ngModel)]="message">
+    </ion-textarea>
+    <ion-buttons slot="end">
+      <ion-fab-button *ngIf="!isLoading" style="width: 45px; height: 43px; margin-bottom: 20px;" color="primary" (click)="sendMessage()">
+        <ion-icon name="send"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="isLoading" size="small" color="primary">
+        <ion-spinner name="crescent" color="white"></ion-spinner>
+      </ion-fab-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

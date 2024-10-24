@@ -1,0 +1,96 @@
+<ion-content [fullscreen]="true">
+  <ion-label>
+    <ion-spinner class="ion-text-center" name="crescent" *ngIf="isLoading"></ion-spinner>
+    <div class="center-img">
+      <ion-img
+      src="\assets\logoblack.png"
+      alt="logotipo"
+      style=" 
+      width: 210px;
+      height: 158px;">
+      </ion-img>
+    </div>
+    <h1 style="font-size: 35px; color: #000000;">Sign Up</h1>
+  </ion-label>
+
+  <form [formGroup]="signupForm">
+    <ion-list lines="none" class="ion-margin ion-padding ion-text-center">
+      <ion-item class="ion-margin-vertical">
+        <ion-icon
+          name="person-outline" slot="end" color="medium">
+        </ion-icon>
+        <ion-input
+          formControlName="username"
+          placeholder="Insira um nome de usuário">
+        </ion-input>
+      </ion-item>
+      <ion-text
+        class="ion-text-left"
+        color="danger"
+        *ngIf="!signupForm.get('username').valid && signupForm.get('username').touched">
+        <p class="error">*Por favor, insira um nome*</p>
+      </ion-text>
+
+      <ion-item class="ion-margin-vertical">
+        <ion-icon
+          name="mail-outline" slot="end" color="medium">
+        </ion-icon>
+        <ion-input
+        formControlName="email"
+        placeholder="Insira seu email">
+        </ion-input>
+      </ion-item>
+      <ion-text
+        class="ion-text-align"
+        color="danger"
+        *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched">
+        <p class="error">*Por favor, insira seu email*</p>
+      </ion-text>
+
+      <ion-item class="ion-margin-vertical">
+        <ion-icon (click)="onChange()"
+          [name]="isTypePassword ? 'lock-closed-outline' : 'lock-open-outline'"
+          slot="end"
+          [color]="isTypePassword ? 'medium' : 'primary'">
+        </ion-icon>
+        <ion-input
+          formControlName="password"
+          [type]="isTypePassword ? 'password' : 'text' "
+          placeholder="Insira sua senha">
+        </ion-input>
+      </ion-item>
+      <ion-text
+        class="ion-text-left"
+        color="danger"
+        *ngIf="signupForm.get('password').invalid && signupForm.get('password').touched">
+        <p 
+          class="error"
+          *ngIf="signupForm.get('password').errors['required']">
+          *Por favor, insira uma senha*
+        </p>
+        <p
+          class="error"
+          *ngIf="signupForm.get('password').dirty">
+          *A senha deve conter 8 caracteres*
+        </p>
+      </ion-text>
+
+      <ion-row class="ion-margin-vertical">
+        <ion-col size="12" class="alignItems">
+          <div align="left">
+            <ion-checkbox></ion-checkbox>
+            <ion-note>Aceito os termos</ion-note>
+          </div>
+        </ion-col>
+      </ion-row>
+      <div class="center-button">
+        <ion-button color="primary" shape="round" (click)="onSubmit()">Cadastrar-se</ion-button>
+      </div>
+            
+      <p class="signup">
+        <ion-note>Já tem registro? <ion-text routerLink="/login" color="primary">Logue aqui</ion-text></ion-note>
+      </p>
+
+    </ion-list>
+  </form>
+</ion-content>
